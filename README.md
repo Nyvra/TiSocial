@@ -32,15 +32,27 @@ For this reason, it's important that before you make the request to create the S
 		});
 	}
 	
+### SinaWeibo
+
+	if (TiSocial.isSinaWeiboSupported) {
+		TiSocial.createSinaWeiboDialog({
+			text: "Foobar message",
+			image: "Foo.jpg",
+			url: "http://www.rafaelks.com"
+		});
+	}
+	
 ## Properties
 
 * **isFacebookSupported** (BOOL)
 * **isTwitterSupported** (BOOL)
+* **isSinaWeiboSupported** (BOOL)
 
 ## Methods
 
 * **createFacebookDialog**: Creates the Facebook iOS dialog.
 * **createTwitterDialog**: Creates the Twitter iOS dialog.
+* **createSinaWeiboDialog**: Creates the SinaWeibo iOS dialog.
 
 ## Parameters
 
@@ -51,6 +63,5 @@ For this reason, it's important that before you make the request to create the S
 
 ## Issues
 
-* Full integration with SinaWeibo
 * Create method to request Facebook account informations
 * Create method to request Twitter account informations
