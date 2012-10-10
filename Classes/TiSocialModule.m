@@ -116,6 +116,19 @@
     return NUMBOOL(available);
 }
 
+-(NSNumber *)isSinaWeiboSupported
+{
+    BOOL available = NO;
+    
+    if (NSClassFromString(@"SLComposeViewController")) {
+        if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeSinaWeibo]) {
+            available = YES;
+        }
+    }
+    
+    return NUMBOOL(available);
+}
+
 #pragma Methods
 
 -(void)createFacebookDialog:(id)args
@@ -186,6 +199,42 @@
         [[TiApp app] showModalController:controller animated:animated];
     }
 }
+
+-(void)createSinaWeiboDialog:(id)args
+{
+    ENSURE_SINGLE_ARG_OR_NIL(args, NSDictionary);
+    
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeSinaWeibo]) {
+        
+        ENSURE_UI_THREAD(createSinaWeiboDialog, args);
+        
+        NSString *message = [TiUtils stringValue:@"text" properties:args def:nil];
+        NSString *url = [TiUtils stringValue:@"url" properties:args def:nil];
+        NSString *image = [TiUtils stringValue:@"image" properties:args def:nil];
+        BOOL animated = [TiUtils boolValue:@"animated" properties:args def:YES];
+        
+        SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeSinaWeibo];
+        controller.completionHandler = ^(SLComposeViewControllerResult result) {
+            [controller dismissViewControllerAnimated:animated completion:nil];
+        };
+        
+        if (message != nil) {
+            [controller setInitialText:message];
+        }
+        
+        if (url != nil) {
+            [controller addURL:[NSURL URLWithString:url]];
+        }
+        
+        if (image != nil) {
+            [controller addImage:[UIImage imageNamed:image]];
+        }
+        
+        [[TiApp app] showModalController:controller animated:animated];
+        
+    }
+}
+
 
 
 @end
