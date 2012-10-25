@@ -146,7 +146,14 @@
         
         SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
         controller.completionHandler = ^(SLComposeViewControllerResult result) {
-            [controller dismissViewControllerAnimated:animated completion:nil];
+			if (result == SLComposeViewControllerResultCancelled) {
+				NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:NUMBOOL(NO),@"success",nil];
+				[self fireEvent:@"cancelled" withObject:event];
+			} else {
+				NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:NUMBOOL(YES),@"success",nil];
+				[self fireEvent:@"complete" withObject:event];
+			}
+			[controller dismissViewControllerAnimated:animated completion:nil];
         };
         
         if (message != nil) {
@@ -181,9 +188,17 @@
         
         SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
         controller.completionHandler = ^(SLComposeViewControllerResult result) {
+	        if (result == SLComposeViewControllerResultCancelled) {
+                NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:NUMBOOL(NO),@"success",nil];
+                [self fireEvent:@"cancelled" withObject:event];                
+            } else {
+                NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:NUMBOOL(YES),@"success",nil];
+                [self fireEvent:@"complete" withObject:event];
+            }
             [controller dismissViewControllerAnimated:animated completion:nil];
         };
         
+
         if (message != nil) {
             [controller setInitialText:message];
         }
