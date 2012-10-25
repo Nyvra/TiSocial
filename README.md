@@ -63,5 +63,6 @@ For this reason, it's important that before you make the request to create the S
 
 ## Issues
 
+* Make compatibility with Twitter framework (from iOS 5) without use [TiTwitter](http://www.github.com/Nyvra/TiTwitter) module
 * Create method to request Facebook account informations
 * Create method to request Twitter account informations
