@@ -2,7 +2,7 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 0.1
+version: 0.2
 apiversion: 2
 description: A Titanium Appcelerator module that implements Social framework to iOS 6+
 author: Rafael Kellermann Streit
@@ -15,4 +15,4 @@ name: tisocial
 moduleid: ti.social
 guid: 3252ec7d-a202-4272-bc75-e709e74834de
 platform: iphone
-minsdk: 2.1.3.v20120927181611
+minsdk: 2.0.0
