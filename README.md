@@ -42,6 +42,27 @@ For this reason, it's important that before you make the request to create the S
 		});
 	}
 	
+### Events
+
+	TiSocial.addEventListener("success", function(e) {
+		if (e.service === "twitter") {
+			Ti.API.info("Twitter sharing successful");
+		}
+	});
+	
+	TiSocial.addEventListener("cancelled", function(e) {
+		if (e.service === "twitter") {
+			Ti.API.info("Twitter sharing cancelled");
+		}
+	});
+	
+## Parameters
+
+* **message**: Message to sharing.
+* **image**: A file to share with your message.
+* **url**: An URL to share with your message.
+* **animated**: Animation in Dialog show/hide. Default is true.
+
 ## Properties
 
 * **isFacebookSupported** (BOOL)
@@ -54,12 +75,14 @@ For this reason, it's important that before you make the request to create the S
 * **createTwitterDialog**: Creates the Twitter iOS dialog.
 * **createSinaWeiboDialog**: Creates the SinaWeibo iOS dialog.
 
-## Parameters
+## Events
 
-* **message**: Message to sharing.
-* **image**: A file to share with your message.
-* **url**: An URL to share with your message.
-* **animated**: Animation in Dialog show/hide. Default is true.
+* **success**: Fired when sharing was successful
+	* **success**: (true / false)
+	* **service**: (twitter / facebook / sinaweibo)
+* **cancelled**: Fired when user cancel sharing
+	* **success**: (true / false)
+  	* **service**: (twitter / facebook / sinaweibo)
 
 ## Issues
 
