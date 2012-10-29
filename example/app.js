@@ -23,9 +23,6 @@ var buttonTwitterExample = Ti.UI.createButton({
 });
 winExample.add(buttonTwitterExample);
 
-
-
-
 var buttonSinaWeibeExample = Ti.UI.createButton({
 	title: "createSinaWeiboDialog();",
 	top: 130,
@@ -34,8 +31,6 @@ var buttonSinaWeibeExample = Ti.UI.createButton({
 	height: 50
 });
 winExample.add(buttonSinaWeibeExample);
-
-
 
 var imageViewExample = Ti.UI.createImageView({
 	image: "Homer.jpg",
@@ -49,15 +44,7 @@ winExample.add(imageViewExample);
 winExample.open();
 
 
-		
-		TiSocial.addEventListener("complete", function(e){
-			Ti.API.info("complete: "+JSON.stringify(e));	
-		});
-	
-		TiSocial.addEventListener("cancelled", function(e){
-			Ti.API.info("cancelled: "+JSON.stringify(e));	
-		});
-
+// Events handler
 buttonFacebookExample.addEventListener("click", function() {
 	if (TiSocial.isFacebookSupported) {
 		TiSocial.createFacebookDialog({
@@ -76,8 +63,6 @@ buttonTwitterExample.addEventListener("click", function() {
 	}
 });
 
-
-
 buttonSinaWeibeExample.addEventListener("click", function() {
 	if (TiSocial.isSinaWeiboSupported) {
 		TiSocial.createSinaWeiboDialog({
@@ -85,4 +70,12 @@ buttonSinaWeibeExample.addEventListener("click", function() {
 			image: "Homer.jpg"
 		});
 	}
+});
+
+TiSocial.addEventListener("complete", function(e){
+	Ti.API.info("complete: " + JSON.stringify(e));	
+});
+
+TiSocial.addEventListener("cancelled", function(e){
+	Ti.API.info("cancelled: " + JSON.stringify(e));	
 });
