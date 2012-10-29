@@ -23,15 +23,40 @@ var buttonTwitterExample = Ti.UI.createButton({
 });
 winExample.add(buttonTwitterExample);
 
+
+
+
+var buttonSinaWeibeExample = Ti.UI.createButton({
+	title: "createSinaWeiboDialog();",
+	top: 130,
+	left: 10,
+	right: 10,
+	height: 50
+});
+winExample.add(buttonSinaWeibeExample);
+
+
+
 var imageViewExample = Ti.UI.createImageView({
 	image: "Homer.jpg",
 	left: 10,
 	right: 10,
-	bottom: 10	
+	bottom: 10,
+	height:100
 });
 winExample.add(imageViewExample);
 
 winExample.open();
+
+
+		
+		TiSocial.addEventListener("complete", function(e){
+			Ti.API.info("complete: "+JSON.stringify(e));	
+		});
+	
+		TiSocial.addEventListener("cancelled", function(e){
+			Ti.API.info("cancelled: "+JSON.stringify(e));	
+		});
 
 buttonFacebookExample.addEventListener("click", function() {
 	if (TiSocial.isFacebookSupported) {
@@ -45,6 +70,17 @@ buttonFacebookExample.addEventListener("click", function() {
 buttonTwitterExample.addEventListener("click", function() {
 	if (TiSocial.isTwitterSupported) {
 		TiSocial.createTwitterDialog({
+			text: "Foobar message",
+			image: "Homer.jpg"
+		});
+	}
+});
+
+
+
+buttonSinaWeibeExample.addEventListener("click", function() {
+	if (TiSocial.isSinaWeiboSupported) {
+		TiSocial.createSinaWeiboDialog({
 			text: "Foobar message",
 			image: "Homer.jpg"
 		});
