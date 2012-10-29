@@ -147,11 +147,15 @@
         SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
         controller.completionHandler = ^(SLComposeViewControllerResult result) {
 			if (result == SLComposeViewControllerResultCancelled) {
-                NSDictionary *event = @{@"success":NUMBOOL(NO),@"service":@"facebook"};
-				[self fireEvent:@"cancelled" withObject:event];
+                if ( [self _hasListeners:@"cancelled"]) {
+                    NSDictionary *event = @{@"success":NUMBOOL(NO),@"service":@"facebook"};
+                    [self fireEvent:@"cancelled" withObject:event];
+                }
 			} else {
-                NSDictionary *event = @{@"success":NUMBOOL(YES),@"service":@"facebook"};
-				[self fireEvent:@"complete" withObject:event];
+                if ( [self _hasListeners:@"complete"]) {
+                    NSDictionary *event = @{@"success":NUMBOOL(YES),@"service":@"facebook"};
+                    [self fireEvent:@"complete" withObject:event];
+                }
 			}
 			[controller dismissViewControllerAnimated:animated completion:nil];
         };
@@ -189,11 +193,15 @@
         SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
         controller.completionHandler = ^(SLComposeViewControllerResult result) {
 	        if (result == SLComposeViewControllerResultCancelled) {
-                NSDictionary *event = @{@"success":NUMBOOL(NO),@"service":@"twitter"};
-                [self fireEvent:@"cancelled" withObject:event];
+                if ( [self _hasListeners:@"cancelled"]) {
+                    NSDictionary *event = @{@"success":NUMBOOL(NO),@"service":@"twitter"};
+                    [self fireEvent:@"cancelled" withObject:event];
+                }
             } else {
-                NSDictionary *event = @{@"success":NUMBOOL(YES),@"service":@"twitter"};
-                [self fireEvent:@"complete" withObject:event];
+                if ( [self _hasListeners:@"complete"]) {
+                    NSDictionary *event = @{@"success":NUMBOOL(YES),@"service":@"twitter"};
+                    [self fireEvent:@"complete" withObject:event];
+                }
             }
             [controller dismissViewControllerAnimated:animated completion:nil];
         };
@@ -231,11 +239,15 @@
         SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeSinaWeibo];
         controller.completionHandler = ^(SLComposeViewControllerResult result) {
             if (result == SLComposeViewControllerResultCancelled) {
-                NSDictionary *event = @{@"success":NUMBOOL(NO),@"service":@"sinaweibo"};
-				[self fireEvent:@"cancelled" withObject:event];
+                if ( [self _hasListeners:@"cancelled"]) {
+                    NSDictionary *event = @{@"success":NUMBOOL(NO),@"service":@"sinaweibo"};
+                    [self fireEvent:@"cancelled" withObject:event];
+                }
 			} else {
-                NSDictionary *event = @{@"success":NUMBOOL(YES),@"service":@"sinaweibo"};
-				[self fireEvent:@"complete" withObject:event];
+                if ( [self _hasListeners:@"complete"]) {
+                    NSDictionary *event = @{@"success":NUMBOOL(YES),@"service":@"sinaweibo"};
+                    [self fireEvent:@"complete" withObject:event];
+                }
 			}
             [controller dismissViewControllerAnimated:animated completion:nil];
         };
